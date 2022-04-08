@@ -1,12 +1,19 @@
 package steps;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class BasePageDef {
+
+    @Before
+    public void openUrl() {
+        open("https://www.saucedemo.com/");
+    }
 
     @Then("Нажать на кнопку подтверждения {string}")
     public void clickOnSubmitButton(String text) {
