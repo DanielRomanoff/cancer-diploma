@@ -28,6 +28,6 @@ public class BaseSteps {
 
     @Then("Видно элемент с текстом {string}")
     public void checkElementIsVisible(String text) {
-        $(By.xpath(".//*[text()='" + text + "']")).shouldBe(visible);
+        $(By.xpath(".//*[contains(text(),'" + text + "')]")).shouldBe(visible);
     }
 }
