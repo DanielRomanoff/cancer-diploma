@@ -43,4 +43,9 @@ public class CartSteps {
     public void haveOnlyItems(String countItems) {
         cart.getNames().shouldBe(CollectionCondition.size(Integer.parseInt(countItems)));
     }
+
+    @Then("Перейти к оформлению заказа")
+    public void checkoutOrder() {
+        cart.checkout().click();
+    }
 }
