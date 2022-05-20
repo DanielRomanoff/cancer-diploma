@@ -1,9 +1,17 @@
 package steps;
 
+import com.codeborne.selenide.Screenshots;
+import com.codeborne.selenide.Selenide;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.en.Given;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Then;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import java.io.*;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,6 +22,19 @@ public class BaseSteps {
     @Before
     public void openUrl() {
         open("https://www.saucedemo.com/");
+    }
+
+    @After
+    public void onTestFailure(Scenario scenario) {
+        if (scenario.isFailed()) {
+            try {
+                File screenshot = Screenshots.takeScreenShotAsFile();
+                InputStream targetStream = new FileInputStream(screenshot);
+                Allure.addAttachment("Screenshot on fail", "image/png", targetStream, "png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Then("Нажать на кнопку подтверждения {string}")

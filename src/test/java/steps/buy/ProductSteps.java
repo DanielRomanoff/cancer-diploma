@@ -14,7 +14,6 @@ import java.util.List;
 
 public class ProductSteps {
     ProductPage product = new ProductPage();
-    CartPage cart  = new CartPage();
     List<Product> excepted = new ArrayList<>();
     List<Product> actual = new ArrayList<>();
 
